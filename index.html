@@ -1,1 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Hey You</title>
+<style>
+body {
+  font-family: Arial;
+  background: #f5f7fa;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+.card {
+  background: white;
+  padding: 30px;
+  border-radius: 12px;
+  max-width: 400px;
+  text-align: center;
+}
+input, button {
+  margin-top: 10px;
+  padding: 10px;
+  width: 100%;
+}
+button {
+  background: #4CAF50;
+  color: white;
+  border: none;
+}
+</style>
+</head>
+<body>
 
+<div class="card">
+  <h2>hey 👋</h2>
+  <p>
+    this is kinda random, but I wanted to talk to you about something<br>
+    and I feel like it’s better said directly<br><br>
+    nothing weird, I promise 😄
+  </p>
+
+  <input type="date" id="date">
+  <input type="time" id="time">
+
+  <button onclick="send()">Confirm</button>
+</div>
+
+<script>
+function send() {
+  const date = document.getElementById("date").value;
+  const time = document.getElementById("time").value;
+
+  if (!date || !time) {
+    alert("pick date & time 😄");
+    return;
+  }
+
+  const phone = "628XXXXXXXXXX";
+  const text = encodeURIComponent(`I’m free on ${date} at ${time}`);
+
+  window.location.href = `https://wa.me/${phone}?text=${text}`;
+}
+</script>
+
+</body>
+</html>
