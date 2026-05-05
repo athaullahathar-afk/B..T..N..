@@ -2,67 +2,457 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Hey You</title>
+<title>Hey You ✨</title>
 <style>
+* {
+  box-sizing: border-box;
+}
+
 body {
-  font-family: Arial;
-  background: #f5f7fa;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100vh;
+  min-height: 100vh;
+  margin: 0;
+  overflow-x: hidden;
 }
+
 .card {
-  background: white;
-  padding: 30px;
-  border-radius: 12px;
-  max-width: 400px;
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(20px);
+  padding: 40px;
+  border-radius: 24px;
+  max-width: 420px;
+  width: 90%;
   text-align: center;
+  box-shadow: 0 25px 45px rgba(0,0,0,0.1);
+  position: relative;
+  animation: slideIn 0.8s ease-out;
+  transform-origin: center;
 }
-input, button {
-  margin-top: 10px;
-  padding: 10px;
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateY(30px) scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.hello-wave {
+  font-size: 3em;
+  margin-bottom: 10px;
+  animation: wave 2s infinite;
+}
+
+@keyframes wave {
+  0%, 100% { transform: rotate(0); }
+  10%, 30%, 50%, 70%, 90% { transform: rotate(15deg); }
+}
+
+h2 {
+  color: #333;
+  margin-bottom: 20px;
+  font-weight: 700;
+}
+
+.message {
+  color: #666;
+  line-height: 1.6;
+  margin-bottom: 30px;
+}
+
+.progress-container {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 30px;
+  position: relative;
+}
+
+.progress-step {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: #e0e0e0;
+  transition: all 0.3s ease;
+  position: relative;
+}
+
+.progress-step.active {
+  background: #4CAF50;
+  transform: scale(1.3);
+  box-shadow: 0 0 10px rgba(76, 175, 80, 0.5);
+}
+
+.progress-step.completed {
+  background: #4CAF50;
+}
+
+.progress-line {
+  position: absolute;
+  top: 5px;
+  left: 16px;
+  right: 16px;
+  height: 2px;
+  background: #e0e0e0;
+  transition: background 0.3s ease;
+}
+
+.progress-line.completed {
+  background: #4CAF50;
+}
+
+.date-time-container {
+  display: none;
+  animation: fadeInUp 0.5s ease;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.input-group {
+  position: relative;
+  margin-bottom: 20px;
+  text-align: left;
+}
+
+.input-group label {
+  display: block;
+  margin-bottom: 8px;
+  color: #555;
+  font-weight: 500;
+  font-size: 14px;
+}
+
+input[type="date"], input[type="time"] {
   width: 100%;
+  padding: 15px 20px;
+  border: 2px solid #e1e5e9;
+  border-radius: 12px;
+  font-size: 16px;
+  background: #f8f9fa;
+  transition: all 0.3s ease;
+  cursor: pointer;
 }
-button {
+
+input[type="date"]:focus, input[type="time"]:focus {
+  outline: none;
+  border-color: #4CAF50;
+  background: white;
+  box-shadow: 0 0 0 3px rgba(76, 175, 80, 0.1);
+  transform: translateY(-2px);
+}
+
+.emoji-picker {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  margin-top: 15px;
+}
+
+.emoji {
+  font-size: 24px;
+  cursor: pointer;
+  padding: 10px;
+  border-radius: 12px;
+  transition: all 0.2s ease;
+  background: #f0f2f5;
+}
+
+.emoji:hover {
+  transform: scale(1.2);
+  background: #e3f2fd;
+}
+
+.emoji.selected {
   background: #4CAF50;
   color: white;
+  transform: scale(1.1);
+}
+
+.btn {
+  width: 100%;
+  padding: 16px;
   border: none;
+  border-radius: 12px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.btn-primary {
+  background: linear-gradient(135deg, #4CAF50, #45a049);
+  color: white;
+  margin-bottom: 10px;
+}
+
+.btn-primary:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 25px rgba(76, 175, 80, 0.3);
+}
+
+.btn-primary:active {
+  transform: translateY(0);
+}
+
+.btn-primary:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.btn-secondary {
+  background: transparent;
+  color: #666;
+  border: 2px solid #e1e5e9;
+}
+
+.btn-secondary:hover {
+  background: #f8f9fa;
+}
+
+.particles {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: -1;
+}
+
+.success-screen {
+  display: none;
+  animation: bounceIn 0.6s ease;
+}
+
+@keyframes bounceIn {
+  0% { transform: scale(0.3); opacity: 0; }
+  50% { transform: scale(1.1); }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+.success-icon {
+  font-size: 4em;
+  margin-bottom: 20px;
+}
+
+@media (max-width: 480px) {
+  .card {
+    padding: 30px 20px;
+    margin: 20px;
+  }
 }
 </style>
 </head>
 <body>
+<div class="particles" id="particles"></div>
 
-<div class="card">
-  <h2>hey 👋</h2>
-  <p>
+<div class="card" id="mainCard">
+  <div class="hello-wave">👋</div>
+  <h2>hey there!</h2>
+  <p class="message">
     this is kinda random, but I wanted to talk to you about something<br>
-    and I feel like it’s better said directly<br><br>
+    and I feel like it's better said directly<br><br>
     nothing weird, I promise 😄
   </p>
 
-  <input type="date" id="date">
-  <input type="time" id="time">
+  <div class="progress-container">
+    <div class="progress-step active" data-step="1"></div>
+    <div class="progress-line" data-line="1"></div>
+    <div class="progress-step" data-step="2"></div>
+    <div class="progress-line" data-line="2"></div>
+    <div class="progress-step" data-step="3"></div>
+  </div>
 
-  <button onclick="send()">Confirm</button>
+  <div class="date-time-container" id="dateTimeContainer">
+    <div class="input-group">
+      <label>📅 Pick a date</label>
+      <input type="date" id="date">
+    </div>
+    <div class="input-group">
+      <label>🕒 Pick a time</label>
+      <input type="time" id="time">
+    </div>
+    <div class="emoji-picker" id="emojiPicker">
+      <span class="emoji" data-emoji="😊">😊</span>
+      <span class="emoji" data-emoji="🎉">🎉</span>
+      <span class="emoji" data-emoji="✨">✨</span>
+      <span class="emoji" data-emoji="💫">💫</span>
+    </div>
+  </div>
+
+  <button class="btn btn-primary" id="nextBtn" onclick="nextStep()">Let's do this →</button>
+  <button class="btn btn-secondary" id="backBtn" onclick="prevStep()" style="display: none;">← Back</button>
+</div>
+
+<div class="card success-screen" id="successCard">
+  <div class="success-icon">✅</div>
+  <h2>Perfect!</h2>
+  <p style="color: #666; margin-bottom: 30px;">
+    I'll be waiting for you on <strong id="selectedDateTime"></strong>
+  </p>
+  <button class="btn btn-primary" onclick="sendMessage()">Send to WhatsApp 📱</button>
 </div>
 
 <script>
-function send() {
-  const date = document.getElementById("date").value;
-  const time = document.getElementById("time").value;
+let currentStep = 1;
+const phone = "628XXXXXXXXXX"; // Replace with actual number
 
-  if (!date || !time) {
-    alert("pick date & time 😄");
-    return;
+function updateProgress(step) {
+  for (let i = 1; i <= 3; i++) {
+    const stepEl = document.querySelector(`[data-step="${i}"]`);
+    const lineEl = document.querySelector(`[data-line="${i}"]`);
+    
+    if (i < step) {
+      stepEl.classList.add('completed');
+      if (lineEl) lineEl.classList.add('completed');
+    } else if (i === step) {
+      stepEl.classList.add('active');
+      stepEl.classList.remove('completed');
+      if (lineEl) lineEl.classList.remove('completed');
+    } else {
+      stepEl.classList.remove('active', 'completed');
+      if (lineEl) lineEl.classList.remove('completed');
+    }
   }
+}
 
-  const phone = "628XXXXXXXXXX";
-  const text = encodeURIComponent(`I’m free on ${date} at ${time}`);
+function nextStep() {
+  if (currentStep === 1) {
+    document.getElementById('dateTimeContainer').style.display = 'block';
+    document.getElementById('nextBtn').textContent = 'Confirm →';
+    document.getElementById('backBtn').style.display = 'block';
+    currentStep = 2;
+    updateProgress(2);
+  } else if (currentStep === 2) {
+    const date = document.getElementById('date').value;
+    const time = document.getElementById('time').value;
+    
+    if (!date || !time) {
+      // Shake animation for inputs
+      document.querySelectorAll('input').forEach(input => {
+        input.style.animation = 'shake 0.5s ease-in-out';
+        setTimeout(() => input.style.animation = '', 500);
+      });
+      return;
+    }
+    
+    // Store selection
+    window.selectedDateTime = `${date} at ${time}`;
+    document.getElementById('selectedDateTime').textContent = window.selectedDateTime;
+    
+    // Show success screen
+    document.getElementById('mainCard').style.display = 'none';
+    document.getElementById('successCard').style.display = 'block';
+    currentStep = 3;
+    updateProgress(3);
+  }
+}
 
-  window.location.href = `https://wa.me/${phone}?text=${text}`;
+function prevStep() {
+  if (currentStep === 2) {
+    document.getElementById('dateTimeContainer').style.display = 'none';
+    document.getElementById('nextBtn').textContent = "Let's do this →";
+    document.getElementById('backBtn').style.display = 'none';
+    currentStep = 1;
+    updateProgress(1);
+  }
+}
+
+function sendMessage() {
+  const emoji = document.querySelector('.emoji.selected')?.dataset.emoji || '';
+  const text = encodeURIComponent(`I’m free on ${window.selectedDateTime} ${emoji}`);
+  
+  // Add loading state
+  const btn = event.target;
+  btn.disabled = true;
+  btn.innerHTML = 'Opening WhatsApp... ⏳';
+  
+  setTimeout(() => {
+    window.open(`https://wa.me/${phone}?text=${text}`, '_blank');
+  }, 500);
+}
+
+// Emoji picker
+document.getElementById('emojiPicker').addEventListener('click', (e) => {
+  if (e.target.classList.contains('emoji')) {
+    document.querySelectorAll('.emoji').forEach(el => el.classList.remove('selected'));
+    e.target.classList.add('selected');
+  }
+});
+
+// Auto-today for date
+document.getElementById('date').valueAsDate = new Date();
+
+// Shake animation
+const shakeKeyframes = `
+  @keyframes shake {
+    0%, 100% { transform: translateX(0); }
+    10%, 30%, 50%, 70%, 90% { transform: translateX(-5px); }
+    20%, 40%, 60%, 80% { transform: translateX(5px); }
+  }
+`;
+const style = document.createElement('style');
+style.textContent = shakeKeyframes;
+document.head.appendChild(style);
+
+// Floating particles
+function createParticle() {
+  const particle = document.createElement('div');
+  particle.style.cssText = `
+    position: absolute;
+    width: 4px;
+    height: 4px;
+    background: rgba(255,255,255,0.6);
+    border-radius: 50%;
+    pointer-events: none;
+    left: ${Math.random() * 100}vw;
+    animation: float ${3 + Math.random() * 2}s linear infinite;
+  `;
+  particle.style.setProperty('--delay', Math.random() * 3 + 's');
+  document.getElementById('particles').appendChild(particle);
+  
+  setTimeout(() => particle.remove(), 5000);
+}
+
+const floatKeyframes = `
+  @keyframes float {
+    0% {
+      transform: translateY(100vh) rotate(0deg);
+      opacity: 1;
+    }
+    100% {
+      transform: translateY(-100px) rotate(360deg);
+      opacity: 0;
+    }
+  }
+`;
+document.head.appendChild(style.cloneNode().textContent = floatKeyframes);
+
+// Create particles periodically
+setInterval(createParticle, 300);
+
+// Initial particle burst
+for (let i = 0; i < 10; i++) {
+  setTimeout(createParticle, i * 100);
 }
 </script>
-
 </body>
 </html>
